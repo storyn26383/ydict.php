@@ -1,0 +1,29 @@
+{
+    "name": "sasaya/unit-test",
+    "authors": [
+        {
+            "name": "Sasaya",
+            "email": "storyn26383@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "require-dev": {
+        "php": "^8.1",
+        "phpunit/phpunit": "^10.3",
+        "mockery/mockery": "^1.6",
+        "phpunit/php-code-coverage": "^10.1",
+        "php-coveralls/php-coveralls": "^2.6",
+        "nunomaduro/collision": "^7.8",
+        "laravel/pint": "^1.11",
+        "phpunit/phpcov": "^9.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    }
+}

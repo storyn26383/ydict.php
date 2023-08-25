@@ -1,0 +1,42 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux_tests:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version: ['8.1', '8.2']
+
+    name: PHP ${{ matrix.php-version }}
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: pcov
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-dist -n -o
+
+      - name: Execute tests
+        run: |
+          vendor/bin/pint src tests --test
+          vendor/bin/phpunit --coverage-php .phpunit.coverage/coverage.cov
+
+      - name: Upload code coverage
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run : |
+          vendor/bin/phpcov merge --clover coverage-clover.xml .phpunit.coverage
+          vendor/bin/php-coveralls -v --coverage_clover coverage-clover.xml --json_path coveralls.json
