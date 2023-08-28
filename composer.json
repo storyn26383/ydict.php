@@ -6,6 +6,9 @@
             "email": "storyn26383@gmail.com"
         }
     ],
+    "bin": [
+        "bin/ydict.php"
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "src"
@@ -29,6 +32,7 @@
     "require": {
         "symfony/dom-crawler": "^6.3",
         "symfony/css-selector": "^6.3",
-        "guzzlehttp/guzzle": "^7.7"
+        "guzzlehttp/guzzle": "^7.7",
+        "symfony/console": "^6.3"
     }
 }
