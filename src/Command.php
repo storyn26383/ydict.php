@@ -14,7 +14,7 @@ class Command extends SingleCommandApplication
     protected function configure(): void
     {
         $this
-            ->setVersion('1.0.0')
+            ->setVersion('1.0.1')
             ->addArgument('word', InputArgument::REQUIRED);
     }
 
