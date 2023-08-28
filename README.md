@@ -4,6 +4,8 @@ Command line Yahoo Dictionary for geeks, inspired by [sayuan/ydict.js](https://g
 
 [![Build Status](https://github.com/storyn26383/ydict.php/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/storyn26383/ydict.php/actions/workflows/tests.yml)
 
+![ydict.php](https://i.imgur.com/kzC0qcc.png)
+
 ## Installation
 
 ```bash
