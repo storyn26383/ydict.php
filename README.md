@@ -1,24 +1,24 @@
-# PHP Project Skeleton
+# ydict.php
 
-A PHP project skeleton integration with PHPUnit, PHP CodeCoverage and Laravel Pint.
+Command line Yahoo Dictionary for geeks, inspired by [sayuan/ydict.js](https://github.com/sayuan/ydict.js/).
 
-[![Build Status](https://github.com/storyn26383/unit-test/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/storyn26383/unit-test/actions/workflows/tests.yml)
-[![Coverage Status](https://coveralls.io/repos/github/storyn26383/unit-test/badge.svg?branch=master)](https://coveralls.io/github/storyn26383/unit-test?branch=master)
+[![Build Status](https://github.com/storyn26383/ydict.php/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/storyn26383/ydict.php/actions/workflows/tests.yml)
+[![Coverage Status](https://coveralls.io/repos/github/storyn26383/ydict.php/badge.svg?branch=master)](https://coveralls.io/github/storyn26383/ydict.php?branch=master)
 
-## Quick Start
-
-### Installation
+## Installation
 
 ```bash
-$ git clone https://github.com/storyn26383/unit-test.git
+composer global require sasaya/ydict.php
+```
 
-$ cd unit-test
-
-$ make init
-`````
-
-### Run Test
+## Usage
 
 ```bash
-$ make test
+ydict.php <word>
+```
+
+### For detailed explanation
+
+```bash
+ydict.php -v <word>
 ```
