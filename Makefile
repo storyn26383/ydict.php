@@ -1,4 +1,4 @@
-.PHONY: init test format-code build
+.PHONY: init test format-code build clean release
 
 init:
 	composer install
@@ -17,3 +17,10 @@ build: clean
 
 clean:
 	rm -rf build
+
+release:
+	sed -ri "s/setVersion\('[^']+'\)/setVersion('$(VERSION)')/" src/Command.php
+	make build
+	git add src/Command.php build/ydict.php.phar
+	git commit -m "feat: bump version to $(VERSION)"
+	git tag -a "v$(VERSION)" -m "v$(VERSION)"
