@@ -32,7 +32,6 @@
     "require": {
         "symfony/dom-crawler": "^6.3",
         "symfony/css-selector": "^6.3",
-        "guzzlehttp/guzzle": "^7.7",
         "symfony/console": "^6.3"
     }
 }

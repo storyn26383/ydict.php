@@ -2,7 +2,6 @@
 
 namespace App;
 
-use GuzzleHttp\Client;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,8 +21,7 @@ class Command extends SingleCommandApplication
     {
         $word = $input->getArgument('word');
 
-        $client = new Client;
-        $fetcher = new Fetcher($client);
+        $fetcher = new Fetcher;
         $crawler = new Crawler($fetcher->fetch($word));
         $parser = new Parser($crawler);
         $renderer = new Renderer($parser, $output);
