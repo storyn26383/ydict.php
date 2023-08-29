@@ -1,4 +1,4 @@
-.PHONY: init test format-code build clean release
+.PHONY: init test format-code build release
 
 init:
 	composer install
@@ -10,13 +10,8 @@ test:
 format-code:
 	vendor/bin/pint src tests
 
-build: clean
-	mkdir -p build
-	composer install --no-dev
-	php -d phar.readonly=off tools/phar-composer build . build/ydict.php.phar
-
-clean:
-	rm -rf build
+build:
+	php -d phar.readonly=off build/build.php
 
 release:
 	sed -ri "s/setVersion\('[^']+'\)/setVersion('$(VERSION)')/" src/Command.php
