@@ -14,7 +14,7 @@ Command line Yahoo Dictionary for geeks, inspired by [sayuan/ydict.js](https://g
 composer global require sasaya/ydict.php
 ```
 
-### Manual Download of PHAR
+### Manual download of PHAR
 
 ```bash
 wget https://github.com/storyn26383/ydict.php/raw/master/build/ydict.php.phar
