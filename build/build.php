@@ -2,7 +2,8 @@
 
 use App\Command;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\NullOutput;
+
+define('ABS_BASE', realpath(__DIR__.'/..'));
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -30,12 +31,17 @@ class Builder
 
         $phar->startBuffering();
 
-        foreach ($this->getIncludedFiles() as $file) {
+        $files = array_unique(array_merge(
+            $this->getIncludedFiles(),
+            $this->getFilesFromDirectory(__DIR__.'/../vendor/symfony/console/Resources')
+        ));
+
+        foreach ($files as $file) {
             if ($file === __FILE__) {
                 continue;
             }
 
-            $phar->addFile($file);
+            $phar->addFile($file, $this->pathToLocalName($file));
         }
 
         $phar->setStub(file_get_contents(__DIR__.'/ydict.php.stub'));
@@ -43,6 +49,26 @@ class Builder
         $phar->stopBuffering();
 
         chmod($this->filepath, 0755);
+    }
+
+    private function getFilesFromDirectory(string $path): array
+    {
+        $files = [];
+
+        foreach (new DirectoryIterator($path) as $file) {
+            if ($file->isDir()) {
+                continue;
+            }
+
+            $files[] = realpath($file->getPathname());
+        }
+
+        return $files;
+    }
+
+    private function pathToLocalName(string $path): string
+    {
+        return str_replace(ABS_BASE.'/', '', $path);
     }
 
     private function clean(): void
@@ -55,13 +81,12 @@ class Builder
     private function getIncludedFiles(): array
     {
         $command = new Command('ydict.php');
-        $output = new NullOutput;
 
         $command->setAutoExit(false);
-        $command->run(new ArgvInput(['ydict.php']), $output);
-        $command->run(new ArgvInput(['ydict.php', 'test']), $output);
-        $command->run(new ArgvInput(['ydict.php', 'tests']), $output);
-        $command->run(new ArgvInput(['ydict.php', 'testss']), $output);
+        $command->run(new ArgvInput(['ydict.php']));
+        $command->run(new ArgvInput(['ydict.php', 'test']));
+        $command->run(new ArgvInput(['ydict.php', 'tests']));
+        $command->run(new ArgvInput(['ydict.php', 'testss']));
 
         return get_included_files();
     }
